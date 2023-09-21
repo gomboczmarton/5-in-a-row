@@ -37,11 +37,11 @@ export class GridService {
   }
 
   verticalMask(grid: Grid, winner: Winner): Winner {
-    for (let row: number = 0; row < 6; row++) {
+    for (let col: number = 0; col < 9; col++) {
       let xCounter: number = 0;
       let oCounter: number = 0;
       let previousCell: string = undefined;
-      for (let col: number = 0; col < 9; col++) {
+      for (let row: number = 0; row < 6; row++) {
         const cell: string = grid.data[row][col];
         if (cell === 'x') {
           xCounter++;
