@@ -292,4 +292,214 @@ describe('GridService', () => {
     expectedWinner.winnerColor = 'x';
     expect(service.verticalMask(grid, winner)).toEqual(expectedWinner);
   });
+
+  it('GridService.diagonalMask1 finds x win', () => {
+    const grid: Grid = new Grid();
+    grid.data = [
+      ['empty', 'empty', 'empty', 'empty', 'x', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'x', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'x', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'x', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['x', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty']
+    ];
+    const winner: Winner = new Winner();
+    const expectedWinner: Winner = new Winner();
+    expectedWinner.winnerColor = 'x';
+    expect(service.diagonalMask1(grid, winner)).toEqual(expectedWinner);
+  });
+
+  it('GridService.diagonalMask1 finds o win', () => {
+    const grid: Grid = new Grid();
+    grid.data = [
+      ['empty', 'empty', 'empty', 'empty', 'o', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'o', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'o', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'o', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['o', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty']
+    ];
+    const winner: Winner = new Winner();
+    const expectedWinner: Winner = new Winner();
+    expectedWinner.winnerColor = 'o';
+    expect(service.diagonalMask1(grid, winner)).toEqual(expectedWinner);
+  });
+
+  it('GridService.diagonalMask1 finds o is not winner - x breaks it', () => {
+    const grid: Grid = new Grid();
+    grid.data = [
+      ['empty', 'empty', 'empty', 'empty', 'o', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'o', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'o', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'x', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['o', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty']
+    ];
+    const winner: Winner = new Winner();
+    const expectedWinner: Winner = new Winner();
+    expectedWinner.winnerColor = undefined;
+    expect(service.diagonalMask1(grid, winner)).toEqual(expectedWinner);
+  });
+
+  it('GridService.diagonalMask1 finds x win - first diagonal', () => {
+    const grid: Grid = new Grid();
+    grid.data = [
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'x'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'x', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'x', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'x', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'x', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty']
+    ];
+    const winner: Winner = new Winner();
+    const expectedWinner: Winner = new Winner();
+    expectedWinner.winnerColor = 'x';
+    expect(service.diagonalMask1(grid, winner)).toEqual(expectedWinner);
+  });
+
+  it('GridService.diagonalMask1 finds x win - first diagonal shifted', () => {
+    const grid: Grid = new Grid();
+    grid.data = [
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'o'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'x', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'x', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'x', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'x', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'x', 'empty', 'empty', 'empty', 'empty', 'empty']
+    ];
+    const winner: Winner = new Winner();
+    const expectedWinner: Winner = new Winner();
+    expectedWinner.winnerColor = 'x';
+    expect(service.diagonalMask1(grid, winner)).toEqual(expectedWinner);
+  });
+
+  it('GridService.diagonalMask1 finds x win - somewhere in the middle diagonal', () => {
+    const grid: Grid = new Grid();
+    grid.data = [
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'x', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'x', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'x', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'x', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'x', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty']
+    ];
+    const winner: Winner = new Winner();
+    const expectedWinner: Winner = new Winner();
+    expectedWinner.winnerColor = 'x';
+    expect(service.diagonalMask1(grid, winner)).toEqual(expectedWinner);
+  });
+
+  it('GridService.diagonalMask1 finds x win - last diagonal', () => {
+    const grid: Grid = new Grid();
+    grid.data = [
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'x'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'x', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'x', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'x', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'x', 'empty', 'empty', 'empty', 'empty']
+    ];
+    const winner: Winner = new Winner();
+    const expectedWinner: Winner = new Winner();
+    expectedWinner.winnerColor = 'x';
+    expect(service.diagonalMask1(grid, winner)).toEqual(expectedWinner);
+  });
+
+  it('GridService.diagonalMask2 finds x win', () => {
+    const grid: Grid = new Grid();
+    grid.data = [
+      ['x', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'x', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'x', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'x', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'x', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty']
+    ];
+    const winner: Winner = new Winner();
+    const expectedWinner: Winner = new Winner();
+    expectedWinner.winnerColor = 'x';
+    expect(service.diagonalMask2(grid, winner)).toEqual(expectedWinner);
+  });
+
+  it('GridService.diagonalMask2 finds o win', () => {
+    const grid: Grid = new Grid();
+    grid.data = [
+      ['o', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'o', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'o', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'o', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'o', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty']
+    ];
+    const winner: Winner = new Winner();
+    const expectedWinner: Winner = new Winner();
+    expectedWinner.winnerColor = 'o';
+    expect(service.diagonalMask2(grid, winner)).toEqual(expectedWinner);
+  });
+
+  it('GridService.diagonalMask2 finds o is not winner - x breaks it', () => {
+    const grid: Grid = new Grid();
+    grid.data = [
+      ['o', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'o', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'x', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'o', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'o', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty']
+    ];
+    const winner: Winner = new Winner();
+    const expectedWinner: Winner = new Winner();
+    expectedWinner.winnerColor = undefined;
+    expect(service.diagonalMask2(grid, winner)).toEqual(expectedWinner);
+  });
+
+  it('GridService.diagonalMask2 finds x win - first diagonal shifted', () => {
+    const grid: Grid = new Grid();
+    grid.data = [
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'x', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'x', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'x', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'x', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'x', 'empty', 'empty', 'empty']
+    ];
+    const winner: Winner = new Winner();
+    const expectedWinner: Winner = new Winner();
+    expectedWinner.winnerColor = 'x';
+    expect(service.diagonalMask2(grid, winner)).toEqual(expectedWinner);
+  });
+
+  it('GridService.diagonalMask2 finds x win - somewhere in the middle diagonal', () => {
+    const grid: Grid = new Grid();
+    grid.data = [
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'x', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'x', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'x', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'x', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'x', 'empty']
+    ];
+    const winner: Winner = new Winner();
+    const expectedWinner: Winner = new Winner();
+    expectedWinner.winnerColor = 'x';
+    expect(service.diagonalMask2(grid, winner)).toEqual(expectedWinner);
+  });
+
+  it('GridService.diagonalMask2 finds x win - last diagonal', () => {
+    const grid: Grid = new Grid();
+    grid.data = [
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['x', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'x', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'x', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'x', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'x', 'empty', 'empty', 'empty', 'empty']
+    ];
+    const winner: Winner = new Winner();
+    const expectedWinner: Winner = new Winner();
+    expectedWinner.winnerColor = 'x';
+    expect(service.diagonalMask2(grid, winner)).toEqual(expectedWinner);
+  });
+
+
 });
